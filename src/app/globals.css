@@ -407,3 +407,217 @@ a:hover {
     width: 100%;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Leaderboard — humans-only contributor table + scaffolded
+   agents placeholder. Ported from Claude Design's Leaderboard.html,
+   minus the podium (deferred to post-hackathon per v1 spec).
+   All selectors scoped under .leaderboard.
+   ───────────────────────────────────────────────────────────── */
+
+.leaderboard {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+}
+
+.leaderboard .page-head {
+  margin-bottom: 28px;
+}
+.leaderboard .page-head h1 {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.leaderboard .page-head .sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 640px;
+  line-height: 1.5;
+}
+
+.leaderboard .section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 36px 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.leaderboard .section-head h2 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.005em;
+}
+.leaderboard .section-head .count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.leaderboard .table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.leaderboard .table-head,
+.leaderboard .row {
+  display: grid;
+  grid-template-columns: 40px 1.8fr 110px 100px 140px;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 20px;
+}
+.leaderboard .table-head {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+.leaderboard .table-head .right { text-align: right; }
+.leaderboard .table-head .center { text-align: center; }
+
+.leaderboard .row {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.leaderboard .row:last-child { border-bottom: none; }
+.leaderboard .row:hover { background: rgba(255, 255, 255, 0.015); }
+
+.leaderboard .row .rank {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.leaderboard .row .who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.leaderboard .row .who .av {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple) 0%, #4A2DB8 100%);
+  color: white;
+  font-size: 11.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.leaderboard .row .who .who-txt { min-width: 0; }
+.leaderboard .row .who .nm {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.leaderboard .row .who .hd {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-dim);
+  margin-top: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leaderboard .row .pts {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 500;
+  text-align: right;
+  letter-spacing: -0.01em;
+}
+.leaderboard .row .num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+.leaderboard .row .last {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-dim);
+  text-align: right;
+}
+
+.leaderboard .empty-hint {
+  padding: 18px 20px;
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  border-top: 1px solid var(--border);
+  background: rgba(110, 70, 229, 0.02);
+}
+.leaderboard .empty-hint strong {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.leaderboard .agents-placeholder {
+  background: var(--surface);
+  border: 1px dashed var(--border-hover);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.leaderboard .agents-placeholder strong {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.leaderboard .footnote {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  line-height: 1.5;
+}
+.leaderboard .footnote .dot {
+  width: 4px;
+  height: 4px;
+  background: var(--text-faint);
+  border-radius: 50%;
+}
+.leaderboard .footnote .k {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (max-width: 720px) {
+  .leaderboard .table-head,
+  .leaderboard .row {
+    grid-template-columns: 30px 1fr 90px 80px;
+  }
+  .leaderboard .hide-sm {
+    display: none !important;
+  }
+}
