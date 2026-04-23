@@ -1,31 +1,150 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-bg: #0d1117;
-  --color-bg-card: #161b22;
-  --color-bg-hover: #1c2129;
-  --color-border: #30363d;
-  --color-text: #e6edf3;
-  --color-text-muted: #8b949e;
-  --color-accent: #a371f7;
-  --color-accent-dim: #7c3aed;
-  --color-green: #00d4aa;
-  --color-orange: #f0883e;
-  --color-red: #f85149;
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+/* Canonical tokens lifted from Claude Design's livingip-shared.css.
+   Single source of truth — do not drift. */
+:root {
+  --bg: #070B14;
+  --surface: #0D1219;
+  --surface-2: #131A26;
+  --surface-3: #1A2230;
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.16);
+  --border-strong: rgba(255,255,255,0.2);
+  --text: #E6E9F0;
+  --text-muted: rgba(255,255,255,0.55);
+  --text-dim: rgba(255,255,255,0.3);
+  --text-faint: rgba(255,255,255,0.15);
+  --purple: #6E46E5;
+  --purple-hover: #7E58F0;
+  --purple-glow: rgba(110,70,229,0.15);
+  --purple-subtle: rgba(110,70,229,0.08);
+  --pos: #4ADE80;
+  --neg: #F87171;
+  --warn: #FBBF24;
+  --radius: 8px;
+  --radius-lg: 12px;
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+  --color-text-faint: var(--text-faint);
+  --color-purple: var(--purple);
+  --color-purple-hover: var(--purple-hover);
+  --color-purple-glow: var(--purple-glow);
+  --color-purple-subtle: var(--purple-subtle);
+  --color-pos: var(--pos);
+  --color-neg: var(--neg);
+  --color-warn: var(--warn);
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--font-sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
-  color: var(--color-accent);
+  color: var(--purple);
   text-decoration: none;
 }
 a:hover {
-  text-decoration: underline;
+  color: var(--purple-hover);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Site chrome — <SiteHeader> scoped styles.
+   Ported from livingip-shared.css. All selectors prefixed with
+   .site-header so they never accidentally style other <header>
+   or <nav> elements elsewhere in the app.
+   ───────────────────────────────────────────────────────────── */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: rgba(7, 11, 20, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+}
+
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.site-header .logo .symbol {
+  height: 22px;
+  width: auto;
+}
+.site-header .logo .wordmark {
+  height: 14px;
+  width: auto;
+  opacity: 0.95;
+}
+
+.site-header .site-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 3px;
+  border: 1px solid var(--border);
+}
+.site-header .site-nav a {
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+.site-header .site-nav a:hover {
+  color: var(--text);
+}
+.site-header .site-nav a.active {
+  color: var(--text);
+  background: var(--purple-subtle);
+}
+
+.site-header .sign-in {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s, border-color 0.15s;
+}
+.site-header .sign-in:hover {
+  color: var(--text);
+  border-color: var(--border-hover);
 }
