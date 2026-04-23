@@ -23,7 +23,7 @@ interface Claim {
 
 // Pick the highest-conviction recent claim as today's focal.
 // No daily-pick cron yet — we read the most recent 20 and choose on each
-// server render. `revalidate: 60` caches the choice for a minute.
+// server render.
 function pickFocalClaim(claims: Claim[]): Claim | null {
   if (!claims.length) return null;
   return [...claims].sort((a, b) => {
