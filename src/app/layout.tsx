@@ -16,9 +16,10 @@ export default function RootLayout({
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         <SiteHeader />
-        <main className="flex-1 w-full max-w-[1120px] mx-auto px-8 py-8">
-          {children}
-        </main>
+        {/* <main> is the full-viewport wrapper. Constrained content pages
+            (.leaderboard, .profile-page) set their own max-width; full-bleed
+            pages (.claim-home) use the full width for flex centering. */}
+        <main className="flex-1 w-full">{children}</main>
       </body>
     </html>
   );
