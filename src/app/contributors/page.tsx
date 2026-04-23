@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { fetchContributors } from "@/lib/api";
 
+export const dynamic = "force-dynamic";
+
 export default async function ContributorsPage() {
   const data = await fetchContributors(1);
   const contributors = data?.contributors || [];

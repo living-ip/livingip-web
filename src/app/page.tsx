@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { fetchClaims, fetchActivityFeed, fetchContributors } from "@/lib/api";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const [claimsData, activityData, contributorsData] = await Promise.all([
     fetchClaims({ limit: 5, sort: "recent" }),

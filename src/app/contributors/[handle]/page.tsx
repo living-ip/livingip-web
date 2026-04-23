@@ -2,6 +2,8 @@ import Link from "next/link";
 import { fetchContributor } from "@/lib/api";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function ContributorProfilePage({
   params,
 }: {
