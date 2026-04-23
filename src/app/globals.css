@@ -621,3 +621,411 @@ a:hover {
     display: none !important;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Contributor profile — /contributors/[handle]
+   Hero card with purple aura + grid texture, stats, per-action
+   and per-role breakdowns, badges, activity feed. Only surfaces
+   fields the API actually returns (no streak / tier / rank).
+   ───────────────────────────────────────────────────────────── */
+
+.profile-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.profile-page .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: color 0.15s;
+}
+.profile-page .back-link:hover {
+  color: var(--text);
+}
+
+.profile-page .grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .profile-page .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hero card — aura gradient + watermark burst + avatar overlap */
+.profile-page .hero {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.profile-page .hero-banner {
+  position: relative;
+  height: 130px;
+  background:
+    radial-gradient(ellipse 400px 180px at 30% 100%, rgba(110, 70, 229, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 200px at 85% 20%, rgba(139, 111, 240, 0.22) 0%, transparent 70%),
+    linear-gradient(135deg, #1a1030 0%, #0e0818 100%);
+}
+
+.profile-page .hero-banner .grid-texture {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.profile-page .hero-banner .watermark {
+  position: absolute;
+  right: 18px;
+  top: 14px;
+  opacity: 0.16;
+}
+
+.profile-page .hero-body {
+  padding: 0 24px 22px;
+  margin-top: -44px;
+  position: relative;
+}
+
+.profile-page .hero-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.profile-page .avatar-frame {
+  padding: 4px;
+  border-radius: 50%;
+  background: var(--bg);
+  flex-shrink: 0;
+}
+.profile-page .avatar-frame .avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 34px;
+  color: white;
+  letter-spacing: -0.5px;
+}
+
+.profile-page .hero-meta {
+  flex: 1;
+  min-width: 0;
+  padding-top: 48px;
+}
+.profile-page .hero-name {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin: 0;
+}
+.profile-page .hero-handle {
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+.profile-page .hero-handle strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.profile-page .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple);
+  background: var(--purple-subtle);
+  border: 1px solid var(--purple-glow);
+  border-radius: 4px;
+}
+
+/* Card — shared section container */
+.profile-page .card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 16px;
+}
+.profile-page .card-head {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.profile-page .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.profile-page .card-body {
+  padding: 16px 20px;
+}
+
+/* Stats row — CI Score + Claims + Joined + Last active */
+.profile-page .stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+}
+.profile-page .stats-row .stat {
+  padding: 16px 20px;
+  border-right: 1px solid var(--border);
+}
+.profile-page .stats-row .stat:last-child {
+  border-right: none;
+}
+.profile-page .stats-row .stat-value {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+.profile-page .stats-row .stat-value.muted {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 560px) {
+  .profile-page .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .profile-page .stats-row .stat {
+    border-bottom: 1px solid var(--border);
+  }
+  .profile-page .stats-row .stat:nth-child(2) {
+    border-right: none;
+  }
+}
+
+/* Breakdown rows — used for per-action CI and per-role percentages */
+.profile-page .bd-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 80px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.profile-page .bd-row:last-child {
+  border-bottom: none;
+}
+.profile-page .bd-label {
+  color: var(--text);
+  text-transform: capitalize;
+  font-weight: 500;
+}
+.profile-page .bd-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.profile-page .bd-fill {
+  height: 100%;
+  background: var(--purple);
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+.profile-page .bd-meta {
+  text-align: right;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* Badges grid */
+.profile-page .badges {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 8px;
+}
+.profile-page .badge {
+  padding: 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  text-align: left;
+}
+.profile-page .badge.limited,
+.profile-page .badge.rare {
+  border-color: rgba(251, 191, 36, 0.3);
+  background: rgba(251, 191, 36, 0.06);
+}
+.profile-page .badge.uncommon {
+  border-color: rgba(74, 222, 128, 0.25);
+  background: rgba(74, 222, 128, 0.05);
+}
+.profile-page .badge-name {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  line-height: 1.2;
+}
+.profile-page .badge.limited .badge-name,
+.profile-page .badge.rare .badge-name {
+  color: var(--warn);
+}
+.profile-page .badge.uncommon .badge-name {
+  color: var(--pos);
+}
+.profile-page .badge-desc {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Activity feed */
+.profile-page .activity {
+  display: flex;
+  flex-direction: column;
+}
+.profile-page .activity .row {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.profile-page .activity .row:last-child {
+  border-bottom: none;
+}
+.profile-page .activity .time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  padding-top: 1px;
+}
+.profile-page .activity .body a {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1.45;
+  display: block;
+}
+.profile-page .activity .body a:hover {
+  color: var(--purple);
+}
+.profile-page .activity .body .meta {
+  margin-top: 4px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.profile-page .activity .ci-earned {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--pos);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Chip — reused for action type, domain, source channel */
+.profile-page .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  font-size: 10.5px;
+  font-weight: 500;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: var(--surface-2);
+  white-space: nowrap;
+}
+.profile-page .chip.type-create {
+  color: var(--pos);
+  background: rgba(74, 222, 128, 0.08);
+  border-color: rgba(74, 222, 128, 0.2);
+}
+.profile-page .chip.type-enrich {
+  color: var(--warn);
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.2);
+}
+.profile-page .chip.type-challenge {
+  color: var(--neg);
+  background: rgba(248, 113, 113, 0.08);
+  border-color: rgba(248, 113, 113, 0.2);
+}
+
+/* Domain chips */
+.profile-page .domain-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.profile-page .domain-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  font-size: 11.5px;
+  font-weight: 500;
+  border-radius: 4px;
+  background: var(--purple-subtle);
+  border: 1px solid var(--purple-glow);
+  color: var(--purple);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.profile-page .domain-chip:hover {
+  background: rgba(110, 70, 229, 0.15);
+}
+.profile-page .domain-chip .count {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.profile-page .empty {
+  padding: 24px 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
