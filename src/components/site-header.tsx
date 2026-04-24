@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AuthButton } from "@/components/auth-button";
 
 const NAV_ITEMS = [
   { label: "Claims", href: "/" },
@@ -65,28 +66,7 @@ export function SiteHeader() {
         ))}
       </nav>
 
-      {/*
-        Sign-in: v1 stub. Behavior pending m3ta decision —
-        Formspark "request access" form vs disabled-dim button.
-        Renders as inert button until wired.
-      */}
-      <button className="sign-in" type="button" aria-label="Sign in">
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-          <circle cx="12" cy="7" r="4" />
-        </svg>
-        Sign in
-      </button>
+      <AuthButton />
     </header>
   );
 }
