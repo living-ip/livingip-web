@@ -1745,3 +1745,103 @@ a:hover {
     padding: 24px 16px 60px;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Auth button — header-right sign-in / avatar dropdown.
+   Swaps between unauthenticated "Sign in" state and authenticated
+   avatar with dropdown to own profile + sign out.
+   ───────────────────────────────────────────────────────────── */
+
+.site-header .auth-menu {
+  position: relative;
+}
+
+.site-header .auth-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px 4px 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text);
+  transition: border-color 0.15s, background 0.15s;
+}
+.site-header .auth-trigger:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-2);
+}
+
+.site-header .auth-handle {
+  letter-spacing: -0.01em;
+}
+
+.site-header .auth-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.site-header .auth-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 200px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  padding: 6px;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.site-header .auth-dropdown .dd-head {
+  padding: 8px 10px 6px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.site-header .auth-dropdown .auth-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background 0.12s, color 0.12s;
+}
+.site-header .auth-dropdown .auth-item:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.site-header .auth-dropdown .dd-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
