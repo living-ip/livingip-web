@@ -176,7 +176,7 @@ export default async function ActivityPage() {
                       </div>
                     </div>
                     <div className="tl-right">
-                      {e.source_channel && (
+                      {e.source_channel && e.source_channel !== "unknown" && (
                         <span className="tl-channel">via {e.source_channel}</span>
                       )}
                       {e.ci_earned > 0 && (

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { fetchContributors } from "@/lib/api";
 
 export const revalidate = 120;
@@ -106,7 +107,7 @@ export default async function LeaderboardPage() {
           humans.map((c, idx) => {
             const name = c.display_name || c.handle;
             return (
-              <div className="row" key={c.handle}>
+              <Link className="row" key={c.handle} href={`/contributors/${c.handle}`}>
                 <div className="rank">{idx + 1}</div>
                 <div className="who">
                   <div className="av" aria-hidden="true">
@@ -120,7 +121,7 @@ export default async function LeaderboardPage() {
                 <div className="pts">{formatNumber(c.ci_score)}</div>
                 <div className="num">{formatNumber(c.claims_merged)}</div>
                 <div className="last">{relativeDate(c.last_contribution)}</div>
-              </div>
+              </Link>
             );
           })
         )}

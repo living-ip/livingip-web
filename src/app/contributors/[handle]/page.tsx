@@ -280,7 +280,7 @@ export default async function ContributorProfilePage({ params }: { params: Param
                       <div className="meta">
                         <span className={`chip type-${e.type}`}>{e.type}</span>
                         {e.domain && <span className="chip">{e.domain}</span>}
-                        {e.source_channel && (
+                        {e.source_channel && e.source_channel !== "unknown" && (
                           <span className="chip">via {e.source_channel}</span>
                         )}
                       </div>
