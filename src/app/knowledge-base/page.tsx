@@ -100,9 +100,10 @@ export default async function KnowledgeBasePage({
     : fallbackMatches.slice((pageNum - 1) * PAGE_SIZE, pageNum * PAGE_SIZE);
 
   const totalForPager = usingFallback ? fallbackMatches.length : totalFromApi;
-  const hasNext = !hasQuery && pageNum * PAGE_SIZE < totalForPager;
-  const hasPrev = !hasQuery && pageNum > 1;
-  const showPager = !hasQuery && (hasPrev || hasNext);
+  const pagerActive = !hasQuery || usingFallback;
+  const hasNext = pagerActive && pageNum * PAGE_SIZE < totalForPager;
+  const hasPrev = pagerActive && pageNum > 1;
+  const showPager = hasPrev || hasNext;
 
   const sortedDomains = Object.entries(domains).sort(
     ([, a], [, b]) => b - a,
@@ -132,13 +133,13 @@ export default async function KnowledgeBasePage({
       return `${searchResults.length} semantic ${searchResults.length === 1 ? "match" : "matches"} for "${q}"`;
     }
     if (usingFallback && fallbackMatches.length > 0) {
-      return `${fallbackMatches.length.toLocaleString()} title ${fallbackMatches.length === 1 ? "match" : "matches"} for "${q}" (no semantic hits above threshold)`;
+      return `${fallbackMatches.length.toLocaleString()} title ${fallbackMatches.length === 1 ? "match" : "matches"} for "${q}" (no strong semantic matches — showing title matches)`;
     }
     return `No matches for "${q}"`;
   })();
 
   const nothingToShow =
-    !hasQuery && browseSlice.length === 0 ||
+    (!hasQuery && browseSlice.length === 0) ||
     (hasQuery && searchResults.length === 0 && fallbackMatches.length === 0);
 
   return (
