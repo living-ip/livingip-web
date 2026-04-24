@@ -44,10 +44,11 @@ export async function fetchActivityFeed(params: {
   return res.json();
 }
 
-export async function fetchContributors(minClaims = 1) {
-  const res = await fetch(`${API_BASE}/api/contributors/list?min_claims=${minClaims}`, {
-    next: { revalidate: 120 },
-  });
+export async function fetchContributors(minClaims = 1, limit = 100) {
+  const res = await fetch(
+    `${API_BASE}/api/contributors/list?min_claims=${minClaims}&limit=${limit}`,
+    { next: { revalidate: 120 } },
+  );
   return res.json();
 }
 
