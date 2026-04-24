@@ -70,7 +70,7 @@ export default async function HomePage() {
           Contributed by <strong>{formatContributor(claim)}</strong>
         </div>
 
-        <ClaimInteraction claimSlug={claim.slug} claimTitle={claim.title} />
+        <ClaimInteraction />
       </div>
     </div>
   );
