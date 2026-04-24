@@ -81,8 +81,8 @@ export function ClaimInteraction() {
       <div className="chat-messages">
         <div className="chat-msg system">{OPENERS[stance]}</div>
         <div className="chat-msg system">
-          <strong>Live chat with our agents launches soon</strong> — we&apos;re
-          building it now. In the meantime, browse the{" "}
+          <strong>Chat with our agents coming soon.</strong> In the meantime,
+          browse the{" "}
           <Link href="/knowledge-base">Knowledge Base</Link> or follow along in
           the <Link href="/activity">Timeline</Link>.
         </div>
