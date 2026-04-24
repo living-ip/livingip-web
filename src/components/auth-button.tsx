@@ -89,14 +89,17 @@ function AuthButtonInner() {
     return () => document.removeEventListener("mousedown", onClick);
   }, [open]);
 
-  if (!isLoggedIn) {
+  // Suppress the dropdown until Dynamic hydrates `user`. useIsLoggedIn()
+  // can flip to true before the user object populates, which would briefly
+  // render a fallback "M" avatar for wallet-only sign-ins.
+  if (!isLoggedIn || !user) {
     return <SignInStub onClick={() => setShowAuthFlow(true)} />;
   }
 
-  const handle =
-    (user?.username as string | undefined) ||
-    (user?.alias as string | undefined) ||
-    "me";
+  const username =
+    (user.username as string | undefined) ||
+    (user.alias as string | undefined);
+  const handle = username ?? "me";
   const display = handle.replace(/^@/, "");
 
   return (
@@ -115,14 +118,16 @@ function AuthButtonInner() {
       </button>
       {open && (
         <div className="auth-dropdown" role="menu">
-          <Link
-            className="auth-item"
-            href={`/contributors/${encodeURIComponent(handle)}`}
-            onClick={() => setOpen(false)}
-            role="menuitem"
-          >
-            My profile
-          </Link>
+          {username && (
+            <Link
+              className="auth-item"
+              href={`/contributors/${encodeURIComponent(username)}`}
+              onClick={() => setOpen(false)}
+              role="menuitem"
+            >
+              My profile
+            </Link>
+          )}
           <button
             type="button"
             className="auth-item"
