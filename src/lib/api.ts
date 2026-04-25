@@ -64,3 +64,33 @@ export async function fetchGrowth() {
   const res = await fetch(`${API_BASE}/api/contributor-growth`, { next: { revalidate: 300 } });
   return res.json();
 }
+
+export type SearchResult = {
+  claim_title: string;
+  claim_path: string;
+  score: number;
+  domain: string;
+  confidence: string;
+  snippet: string;
+  type: string;
+};
+
+export type SearchResponse = {
+  query: string;
+  direct_results: SearchResult[];
+  expanded_results: SearchResult[];
+  total: number;
+};
+
+export async function fetchSearch(q: string, limit = 20): Promise<SearchResponse | null> {
+  const query = new URLSearchParams({ q, limit: String(limit) });
+  try {
+    const res = await fetch(`${API_BASE}/api/search?${query}`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as SearchResponse;
+  } catch {
+    return null;
+  }
+}
