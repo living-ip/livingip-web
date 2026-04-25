@@ -257,6 +257,58 @@ a:hover {
   color: var(--text-muted);
 }
 
+/* Title-as-link: only renders for api_fetchable claims. We want it to
+   look like the static claim text (white, no underline) and gain a
+   subtle dotted underline on hover so the affordance is visible without
+   stealing the typographic emphasis. The global `a:hover` purple rule
+   would otherwise win — override it explicitly here. */
+.claim-home .claim-text-link {
+  color: var(--text);
+  display: block;
+  border-bottom: 1px dotted transparent;
+  transition: border-color 0.15s;
+}
+.claim-home .claim-text-link:hover {
+  color: var(--text);
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+.claim-home .rotation-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 32px;
+  font-family: var(--font-mono);
+}
+.claim-home .rotation-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.claim-home .rotation-arrow:hover {
+  color: var(--text);
+  border-color: var(--border-hover);
+  background: rgba(255, 255, 255, 0.03);
+}
+.claim-home .rotation-counter {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  min-width: 56px;
+  text-align: center;
+}
+
 .claim-home .chat-panel {
   margin-top: 28px;
   max-width: 680px;
