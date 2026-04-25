@@ -29,38 +29,29 @@ export function ClaimInteraction() {
 
   if (!stance) {
     return (
-      <>
-        <div className="actions">
-          <button
-            type="button"
-            className="action-btn primary"
-            onClick={() => setStance("agree")}
-          >
-            I agree
-          </button>
-          <button
-            type="button"
-            className="action-btn secondary"
-            onClick={() => setStance("disagree")}
-          >
-            Disagree — here&apos;s why
-          </button>
-          <button
-            type="button"
-            className="action-btn secondary"
-            onClick={() => setStance("explore")}
-          >
-            Tell me more
-          </button>
-        </div>
+      <div className="actions">
         <button
           type="button"
-          className="skip-link"
-          onClick={() => window.location.reload()}
+          className="action-btn primary"
+          onClick={() => setStance("agree")}
         >
-          show me another →
+          I agree
         </button>
-      </>
+        <button
+          type="button"
+          className="action-btn secondary"
+          onClick={() => setStance("disagree")}
+        >
+          Disagree — here&apos;s why
+        </button>
+        <button
+          type="button"
+          className="action-btn secondary"
+          onClick={() => setStance("explore")}
+        >
+          Tell me more
+        </button>
+      </div>
     );
   }
 
