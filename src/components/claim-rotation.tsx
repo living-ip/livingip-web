@@ -49,6 +49,8 @@ export function ClaimRotation({ rotation, initialIndex }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [total]);
 
+  if (!entry) return null;
+
   // Title is a click-through to the KB reader only when the underlying
   // claim is fetchable via /api/claims/{slug}. Foundations + core claims
   // aren't yet exposed (Argus FOUND-001) — render as static text.
@@ -72,7 +74,7 @@ export function ClaimRotation({ rotation, initialIndex }: Props) {
           Contributed by <strong>{entry.sourcer}</strong>
         </div>
 
-        <ClaimInteraction />
+        <ClaimInteraction key={entry.slug} />
 
         <div className="rotation-nav" aria-label="Walk the rotation">
           <button
