@@ -1,11 +1,29 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
+const DESCRIPTION =
+  "A collective intelligence knowledge base. Browse claims, follow contributors, see the system grow.";
+
 export const metadata: Metadata = {
-  title: "LivingIP",
-  description: "Collective intelligence knowledge system",
+  title: {
+    default: "teleo",
+    template: "teleo — %s",
+  },
+  description: DESCRIPTION,
+  openGraph: {
+    siteName: "LivingIP",
+    title: "teleo",
+    description: DESCRIPTION,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "teleo",
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
@@ -23,6 +41,10 @@ export default function RootLayout({
               pages (.claim-home) use the full width for flex centering. */}
           <main className="flex-1 w-full">{children}</main>
         </Providers>
+        {/* SiteFooter sits outside <Providers> so the body's flex chain stays
+            stable across the SSR-fragment → DynamicContextProvider hydration
+            swap. Footer is static decoration; doesn't need Dynamic context. */}
+        <SiteFooter />
       </body>
     </html>
   );

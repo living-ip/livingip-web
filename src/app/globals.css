@@ -91,17 +91,21 @@ a:hover {
 .site-header .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   text-decoration: none;
+  color: var(--text);
 }
 .site-header .logo .symbol {
   height: 22px;
   width: auto;
 }
 .site-header .logo .wordmark {
-  height: 14px;
-  width: auto;
-  opacity: 0.95;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1;
 }
 
 .site-header .site-nav {
@@ -1942,3 +1946,24 @@ a:hover {
   background: var(--border);
   margin: 4px 0;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Site footer — minimal company attribution.
+   "LivingIP · 2026" per Ship's brief; product name "teleo" lives
+   in the header, company name lives here only.
+   ───────────────────────────────────────────────────────────── */
+
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 32px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
