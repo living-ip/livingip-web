@@ -194,6 +194,51 @@ a:hover {
   margin-bottom: 20px;
 }
 
+.claim-home .claim-steelman {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.claim-home .claim-contributors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+.claim-home .claim-contributor {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.claim-home .claim-contributor-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.claim-home .claim-contributor-handle {
+  font-weight: 500;
+  color: var(--text);
+}
+
 .claim-home .claim-source {
   font-size: 13px;
   color: var(--text-dim);

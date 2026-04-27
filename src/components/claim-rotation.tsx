@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { RotationEntry } from "@/lib/rotation";
 import { ClaimInteraction } from "@/components/claim-interaction";
@@ -10,8 +9,25 @@ interface Props {
   initialIndex: number;
 }
 
-function formatDomain(domain: string): string {
-  return domain.replace(/-/g, " ");
+// Hash handle → hue for deterministic avatar gradient. Mirrors the inline
+// pattern in auth-button + profile pages (same user → same color sitewide).
+function handleHue(handle: string): number {
+  let hash = 0;
+  for (let i = 0; i < handle.length; i++) {
+    hash = (hash * 31 + handle.charCodeAt(i)) & 0xffffffff;
+  }
+  return Math.abs(hash) % 360;
+}
+
+function avatarStyle(handle: string) {
+  const hue = handleHue(handle);
+  return {
+    background: `linear-gradient(135deg, oklch(0.70 0.15 ${hue}deg) 0%, oklch(0.48 0.17 ${hue}deg) 100%)`,
+  };
+}
+
+function initial(handle: string): string {
+  return handle.replace(/^@/, "").charAt(0).toUpperCase() || "?";
 }
 
 // Skip rotation nav while the user is typing in the chat panel — otherwise
@@ -51,30 +67,35 @@ export function ClaimRotation({ rotation, initialIndex }: Props) {
 
   if (!entry) return null;
 
-  // Title is a click-through to the KB reader only when the underlying
-  // claim is fetchable via /api/claims/{slug}. Foundations + core claims
-  // aren't yet exposed (Argus FOUND-001) — render as static text.
-  const titleEl = entry.api_fetchable ? (
-    <Link
-      href={`/knowledge-base/${encodeURIComponent(entry.slug)}`}
-      className="claim-text claim-text-link"
-    >
-      {entry.title}
-    </Link>
-  ) : (
-    <div className="claim-text">{entry.title}</div>
-  );
+  const visibleContributors = entry.contributors.slice(0, 3);
 
   return (
     <div className="claim-home">
       <div className="claim-block">
-        <div className="claim-domain">{formatDomain(entry.domain)}</div>
-        {titleEl}
-        <div className="claim-source">
-          Contributed by <strong>{entry.sourcer}</strong>
-        </div>
+        <div className="claim-text">{entry.title}</div>
+        <div className="claim-steelman">{entry.steelman}</div>
 
-        <ClaimInteraction key={entry.slug} />
+        {visibleContributors.length > 0 && (
+          <div
+            className="claim-contributors"
+            aria-label="Contributors to this claim"
+          >
+            {visibleContributors.map((c) => (
+              <span key={c.handle} className="claim-contributor">
+                <span
+                  className="claim-contributor-avatar"
+                  style={avatarStyle(c.handle)}
+                  aria-hidden="true"
+                >
+                  {initial(c.handle)}
+                </span>
+                <span className="claim-contributor-handle">{c.handle}</span>
+              </span>
+            ))}
+          </div>
+        )}
+
+        <ClaimInteraction key={entry.id} />
 
         <div className="rotation-nav" aria-label="Walk the rotation">
           <button
