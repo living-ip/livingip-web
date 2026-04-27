@@ -40,8 +40,11 @@ export default function RootLayout({
               (.leaderboard, .profile-page) set their own max-width; full-bleed
               pages (.claim-home) use the full width for flex centering. */}
           <main className="flex-1 w-full">{children}</main>
-          <SiteFooter />
         </Providers>
+        {/* SiteFooter sits outside <Providers> so the body's flex chain stays
+            stable across the SSR-fragment → DynamicContextProvider hydration
+            swap. Footer is static decoration; doesn't need Dynamic context. */}
+        <SiteFooter />
       </body>
     </html>
   );

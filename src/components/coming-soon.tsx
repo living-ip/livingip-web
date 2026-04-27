@@ -36,7 +36,6 @@ export function ComingSoon() {
           />
         </svg>
         <span
-          aria-label="teleo"
           style={{
             fontFamily: "var(--font-sans)",
             fontWeight: 500,
