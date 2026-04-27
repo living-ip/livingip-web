@@ -55,7 +55,8 @@ function formatRelative(iso: string | null | undefined): string {
 export async function generateMetadata({ params }: { params: Params }) {
   const { handle } = await params;
   return {
-    title: `@${handle} — LivingIP`,
+    // Rendered through layout's title.template as "teleo — @handle"
+    title: `@${handle}`,
     description: `Contributor profile for @${handle}`,
   };
 }
