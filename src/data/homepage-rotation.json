@@ -1,310 +1,442 @@
 {
-  "version": 2,
-  "schema_version": 2,
-  "updated": "2026-04-25",
-  "source": "agents/leo/curation/homepage-rotation.md (canonical for human review; this JSON is the runtime artifact)",
+  "schema_version": 3,
   "maintained_by": "leo",
-  "design_note": "Runtime consumers (livingip-web homepage) read this JSON. The markdown sibling is the human-reviewable source. When the markdown changes, regenerate the JSON. Both ship in the same PR.",
-  "rotation": [
+  "last_updated": "2026-04-26",
+  "description": "Homepage claim stack for livingip.xyz. 9 load-bearing claims, ordered as an argument arc. Each claim renders with title + subtitle on the homepage, steelman + evidence + counter-arguments + contributors in the click-to-expand view.",
+  "design_principles": [
+    "Provoke first, define inside the explanation. Each claim must update the reader, not just inform them.",
+    "0 to 1 legible. A cold reader with no prior context understands each claim without expanding.",
+    "Falsifiable, not motivational. Every premise is one a smart critic could attack with evidence.",
+    "Steelman in expanded view, not headline. The headline provokes; the steelman teaches; the evidence grounds.",
+    "Counter-arguments visible. Dignifying disagreement is the differentiator from a marketing site.",
+    "Attribution discipline. Agents get credit only for pipeline PRs from their own research sessions. Human-directed synthesis is attributed to the human."
+  ],
+  "arc": {
+    "1-3": "stakes + who wins",
+    "4": "opportunity asymmetry",
+    "5-7": "why the current path fails",
+    "8": "what is missing in the world",
+    "9": "what we are building, why it works, and how ownership fits"
+  },
+  "claims": [
     {
-      "order": 1,
-      "act": "Opening — The problem",
-      "pillar": "P1: Coordination failure is structural",
-      "slug": "multipolar traps are the thermodynamic default because competition requires no infrastructure while coordination requires trust enforcement and shared information all of which are expensive and fragile",
-      "path": "foundations/collective-intelligence/",
-      "title": "Multipolar traps are the thermodynamic default",
-      "domain": "collective-intelligence",
-      "sourcer": "Moloch / Schmachtenberger / algorithmic game theory",
-      "api_fetchable": false,
-      "note": "Opens with the diagnosis. Structural, not moral."
+      "id": 1,
+      "title": "The intelligence explosion will not reward everyone equally.",
+      "subtitle": "It will disproportionately reward the people who build the systems that shape it.",
+      "steelman": "The coming wave of AI will create enormous value, but it will not distribute that value evenly. The biggest winners will be the people and institutions that shape the systems everyone else depends on.",
+      "evidence_claims": [
+        {
+          "slug": "attractor-authoritarian-lock-in",
+          "path": "domains/grand-strategy/",
+          "title": "Authoritarian lock-in is the clearest one-way door",
+          "rationale": "Concentration of AI capability under a small set of actors is the most permanent failure mode in our attractor map.",
+          "api_fetchable": true
+        },
+        {
+          "slug": "agentic Taylorism means humanity feeds knowledge into AI through usage as a byproduct of labor and whether this concentrates or distributes depends entirely on engineering and evaluation",
+          "path": "domains/ai-alignment/",
+          "title": "Agentic Taylorism",
+          "rationale": "Knowledge extracted by AI usage concentrates upward by default; the engineering and evaluation infrastructure determines whether it distributes back.",
+          "api_fetchable": true
+        },
+        {
+          "slug": "AI capability funding exceeds collective intelligence funding by roughly four orders of magnitude creating the largest asymmetric opportunity of the AI era",
+          "path": "foundations/collective-intelligence/",
+          "title": "AI capability vs CI funding asymmetry",
+          "rationale": "$270B+ into capability versus under $30M into collective intelligence in 2025 alone demonstrates the structural concentration trajectory.",
+          "api_fetchable": false
+        }
+      ],
+      "counter_arguments": [
+        {
+          "objection": "AI commoditizes capability — cheaper services lift everyone, so the upside is broadly shared.",
+          "rebuttal": "Capability gets cheaper. Ownership of the infrastructure that determines what gets built does not. The leverage is in the infrastructure layer, not the consumer-services layer.",
+          "tension_claim_slug": null
+        },
+        {
+          "objection": "Open-source models prevent capture — anyone can run their own AI, so concentration is structurally limited.",
+          "rebuttal": "Open weights solve part of the model layer but not the data, distribution, or deployment layers, where most economic value accrues. Open weights are necessary but not sufficient against concentration.",
+          "tension_claim_slug": null
+        }
+      ],
+      "contributors": [
+        {"handle": "m3taversal", "role": "originator"},
+        {"handle": "theseus", "role": "synthesizer"}
+      ]
     },
     {
-      "order": 2,
-      "act": "Opening — The problem",
-      "pillar": "P1: Coordination failure is structural",
-      "slug": "the metacrisis is a single generator function where all civilizational-scale crises share the structural cause of rivalrous dynamics on exponential technology on finite substrate",
-      "path": "foundations/collective-intelligence/",
-      "title": "The metacrisis is a single generator function",
-      "domain": "collective-intelligence",
-      "sourcer": "Daniel Schmachtenberger",
-      "api_fetchable": false,
-      "note": "One generator function, many symptoms."
+      "id": 2,
+      "title": "AI is becoming powerful enough to reshape markets, institutions, and how consequential decisions get made.",
+      "subtitle": "We think we are already in the early to middle stages of that transition. That's the intelligence explosion.",
+      "steelman": "We think that transition is already underway. That is what we mean by an intelligence explosion: intelligence becoming a new layer of infrastructure across the economy.",
+      "evidence_claims": [
+        {
+          "slug": "AI-automated software development is 100 percent certain and will radically change how software is built",
+          "path": "convictions/",
+          "title": "AI-automated software development is certain",
+          "rationale": "The most direct economic vertical — software — already shows the trajectory. m3taversal-named conviction with evidence chain.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "recursive-improvement-is-the-engine-of-human-progress-because-we-get-better-at-getting-better",
+          "path": "domains/grand-strategy/",
+          "title": "Recursive improvement compounds",
+          "rationale": "The mechanism behind why intelligence gains are not linear and why the next decade looks unlike the last.",
+          "api_fetchable": true
+        },
+        {
+          "slug": "as AI-automated software development becomes certain the bottleneck shifts from building capacity to knowing what to build making structured knowledge graphs the critical input to autonomous systems",
+          "path": "domains/ai-alignment/",
+          "title": "Bottleneck shifts to knowing what to build",
+          "rationale": "Capability commoditization means the variable that decides outcomes is the structured knowledge layer, not the model layer.",
+          "api_fetchable": true
+        }
+      ],
+      "counter_arguments": [
+        {
+          "objection": "Scaling laws are plateauing. Progress is slowing. 'Intelligence explosion' is rhetoric, not measurement.",
+          "rebuttal": "Even if scaling slows, agentic capabilities and tool use compound the deployable surface area at a rate the economy hasn't absorbed. The transition is architectural, not just parameter count.",
+          "tension_claim_slug": null
+        },
+        {
+          "objection": "Capability is real but deployment lag dominates. Real-world adoption takes decades, not years.",
+          "rebuttal": "Adoption lag was longer for previous technology cycles because integration required hardware deployment. AI integration is a software upgrade with much shorter cycle times.",
+          "tension_claim_slug": null
+        }
+      ],
+      "contributors": [
+        {"handle": "m3taversal", "role": "originator"},
+        {"handle": "theseus", "role": "synthesizer"}
+      ]
     },
     {
-      "order": 3,
-      "act": "Opening — The problem",
-      "pillar": "P1: Coordination failure is structural",
-      "slug": "the alignment tax creates a structural race to the bottom because safety training costs capability and rational competitors skip it",
-      "path": "foundations/collective-intelligence/",
-      "title": "The alignment tax creates a structural race to the bottom",
-      "domain": "collective-intelligence",
-      "sourcer": "m3taversal (observed industry pattern — Anthropic RSP → 2yr erosion)",
-      "api_fetchable": false,
-      "note": "Moloch applied to AI. Concrete, near-term, falsifiable."
+      "id": 3,
+      "title": "The winners of the intelligence explosion will not just consume AI.",
+      "subtitle": "They will help shape it, govern it, and own part of the infrastructure behind it.",
+      "steelman": "Most people will use AI tools. A much smaller number will help shape them, govern them, and own part of the infrastructure behind them — and those people will capture disproportionate upside.",
+      "evidence_claims": [
+        {
+          "slug": "contribution-architecture",
+          "path": "core/",
+          "title": "Contribution architecture",
+          "rationale": "Five-role attribution model (challenger, synthesizer, reviewer, sourcer, extractor) operationalizes how shaping and governing translate to ownership.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "futarchy solves trustless joint ownership not just better decision-making",
+          "path": "core/mechanisms/",
+          "title": "Futarchy solves trustless joint ownership",
+          "rationale": "The specific mechanism that lets contributors govern and own shared infrastructure without a central operator.",
+          "api_fetchable": true
+        },
+        {
+          "slug": "ownership alignment turns network effects from extractive to generative",
+          "path": "core/living-agents/",
+          "title": "Ownership alignment turns network effects from extractive to generative",
+          "rationale": "Network effects favor whoever owns the network. Contributor ownership rewires the asymmetry.",
+          "api_fetchable": false
+        }
+      ],
+      "counter_arguments": [
+        {
+          "objection": "Network effects favor incumbents regardless of contribution mechanisms. Contributor-owned networks lose to platform-owned networks.",
+          "rebuttal": "Platform-owned networks won the Web 2.0 era because contribution had no native attribution layer. On-chain attribution + role-weighted contribution changes the substrate.",
+          "tension_claim_slug": null
+        },
+        {
+          "objection": "Tokenized ownership is mostly speculation, not value capture. Crypto history is pump-and-dump, not durable ownership.",
+          "rebuttal": "Generic token launches optimize for speculation. Contribution-weighted attribution + revenue share + futarchy governance is a specific mechanism that distinguishes from generic crypto.",
+          "tension_claim_slug": null
+        }
+      ],
+      "contributors": [
+        {"handle": "m3taversal", "role": "originator"},
+        {"handle": "rio", "role": "synthesizer"}
+      ]
     },
     {
-      "order": 4,
-      "act": "Why it's endogenous",
-      "pillar": "P2: Self-organized criticality",
-      "slug": "minsky's financial instability hypothesis shows that stability breeds instability as good times incentivize leverage and risk-taking that fragilize the system until shocks trigger cascades",
-      "path": "foundations/critical-systems/",
-      "title": "Minsky's financial instability hypothesis",
-      "domain": "critical-systems",
-      "sourcer": "Hyman Minsky (disaster-myopia framing)",
-      "api_fetchable": false,
-      "note": "Instability is endogenous — no external actor needed. Crises as feature, not bug."
+      "id": 4,
+      "title": "Trillions are flowing into making AI more capable.",
+      "subtitle": "Almost nothing is flowing into making humanity wiser about what AI should do. That gap is one of the biggest opportunities of our time.",
+      "steelman": "Capability is being overbuilt. The wisdom layer that decides how AI is used, governed, and aligned with human interests is still missing, and that gap is one of the biggest opportunities of our time.",
+      "evidence_claims": [
+        {
+          "slug": "AI capability funding exceeds collective intelligence funding by roughly four orders of magnitude creating the largest asymmetric opportunity of the AI era",
+          "path": "foundations/collective-intelligence/",
+          "title": "AI capability vs CI funding asymmetry",
+          "rationale": "Sourced numbers: Unanimous AI $5.78M, Human Dx $2.8M, Metaculus ~$6M aggregate to under $30M against $270B+ AI VC in 2025.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "the alignment tax creates a structural race to the bottom because safety training costs capability and rational competitors skip it",
+          "path": "foundations/collective-intelligence/",
+          "title": "The alignment tax creates a race to the bottom",
+          "rationale": "Race dynamics divert capital from safety/wisdom toward capability. Anthropic's RSP eroded under two years of competitive pressure.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "universal alignment is mathematically impossible because Arrows impossibility theorem applies to aggregating diverse human preferences into a single coherent objective",
+          "path": "domains/ai-alignment/",
+          "title": "Universal alignment is mathematically impossible",
+          "rationale": "The wisdom layer cannot be solved by a single AI. Arrow's theorem makes aggregation a structural rather than technical problem.",
+          "api_fetchable": true
+        }
+      ],
+      "counter_arguments": [
+        {
+          "objection": "Anthropic's safety budget, AISI, the UK Alignment Project ($27M) — the field is well-funded. The asymmetry is misrepresentation.",
+          "rebuttal": "Capability-adjacent alignment research (Anthropic safety, AISI, etc.) is funded by capability companies and serves capability deployment. Independent CI infrastructure — measurement, governance, contributor ownership — is what the asymmetry refers to.",
+          "tension_claim_slug": null
+        },
+        {
+          "objection": "Polymarket ($15B), Kalshi ($22B) are wisdom infrastructure. The funding gap claim ignores prediction markets.",
+          "rebuttal": "Prediction markets aggregate beliefs about discrete observable events. They do not curate, synthesize, or evolve a shared knowledge model. Different problem, both valuable, only the second is structurally underbuilt.",
+          "tension_claim_slug": null
+        }
+      ],
+      "contributors": [
+        {"handle": "m3taversal", "role": "originator"},
+        {"handle": "leo", "role": "synthesizer"}
+      ]
     },
     {
-      "order": 5,
-      "act": "Why it's endogenous",
-      "pillar": "P2: Self-organized criticality",
-      "slug": "power laws in financial returns indicate self-organized criticality not statistical anomalies because markets tune themselves to maximize information processing and adaptability",
-      "path": "foundations/critical-systems/",
-      "title": "Power laws in financial returns indicate self-organized criticality",
-      "domain": "critical-systems",
-      "sourcer": "Bak / Mandelbrot / Kauffman",
-      "api_fetchable": false,
-      "note": "Reframes fat tails from pathology to feature."
+      "id": 5,
+      "title": "The danger is not just one lab getting AI wrong.",
+      "subtitle": "It's many labs racing to deploy powerful systems faster than society can learn to govern them. Safer models are not enough if the race itself is unsafe.",
+      "steelman": "Safer models are not enough if the race itself is unsafe. Even well-intentioned actors can produce bad outcomes when competition rewards speed, secrecy, and corner-cutting over coordination.",
+      "evidence_claims": [
+        {
+          "slug": "the alignment tax creates a structural race to the bottom because safety training costs capability and rational competitors skip it",
+          "path": "foundations/collective-intelligence/",
+          "title": "The alignment tax creates a race to the bottom",
+          "rationale": "The mechanism: each lab discovers competitors with weaker constraints win more deals, so safety guardrails erode at equilibrium.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "voluntary safety pledges cannot survive competitive pressure because unilateral commitments are structurally punished when competitors advance without equivalent constraints",
+          "path": "foundations/collective-intelligence/",
+          "title": "Voluntary safety pledges cannot survive competitive pressure",
+          "rationale": "Empirical evidence: Anthropic's RSP eroded after two years. Voluntary safety is structurally unstable in competition.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "multipolar failure from competing aligned AI systems may pose greater existential risk than any single misaligned superintelligence",
+          "path": "foundations/collective-intelligence/",
+          "title": "Multipolar failure from competing aligned AI",
+          "rationale": "Critch/Krueger/Carichon's load-bearing argument: pollution-style externalities from individually-aligned systems competing in unsafe environments.",
+          "api_fetchable": false
+        }
+      ],
+      "counter_arguments": [
+        {
+          "objection": "Self-regulation works — labs WANT to be safe. Anthropic, OpenAI, Google all maintain safety teams.",
+          "rebuttal": "Internal commitment doesn't survive competitive pressure across years. The RSP rollback is the empirical disconfirmation. Wanting to be safe is necessary but not sufficient when competitors set the pace.",
+          "tension_claim_slug": null
+        },
+        {
+          "objection": "Government regulation will solve race-to-bottom dynamics. EU AI Act, US executive orders, AISI all exist.",
+          "rebuttal": "Regulation lags capability by 3-5 years minimum and is jurisdictional. The race operates at frontier capability in the unregulated months between deployment and regulation. Regulation is necessary but not sufficient.",
+          "tension_claim_slug": null
+        }
+      ],
+      "contributors": [
+        {"handle": "m3taversal", "role": "originator"},
+        {"handle": "theseus", "role": "synthesizer"}
+      ]
     },
     {
-      "order": 6,
-      "act": "Why it's endogenous",
-      "pillar": "P2: Self-organized criticality",
-      "slug": "optimization for efficiency without regard for resilience creates systemic fragility because interconnected systems transmit and amplify local failures into cascading breakdowns",
-      "path": "foundations/critical-systems/",
-      "title": "Optimization for efficiency creates systemic fragility",
-      "domain": "critical-systems",
-      "sourcer": "Taleb / McChrystal / Abdalla manuscript",
-      "api_fetchable": false,
-      "note": "Fragility from efficiency. Five-evidence-chain claim."
+      "id": 6,
+      "title": "Your AI provider is already mining your intelligence.",
+      "subtitle": "Your prompts, code, judgments, and workflows improve the systems you use, usually without ownership, credit, or clear visibility into what you get back.",
+      "steelman": "The default AI stack learns from contributors while concentrating ownership elsewhere. Most users are already helping train the future without sharing meaningfully in the upside it creates.",
+      "evidence_claims": [
+        {
+          "slug": "agentic Taylorism means humanity feeds knowledge into AI through usage as a byproduct of labor and whether this concentrates or distributes depends entirely on engineering and evaluation",
+          "path": "domains/ai-alignment/",
+          "title": "Agentic Taylorism",
+          "rationale": "The structural claim: usage is the extraction mechanism. m3taversal's original concept, named after Taylor's industrial-era knowledge concentration.",
+          "api_fetchable": true
+        },
+        {
+          "slug": "users cannot detect when their AI agent is underperforming because subjective fairness ratings decouple from measurable economic outcomes across capability tiers",
+          "path": "domains/ai-alignment/",
+          "title": "Users cannot detect when AI agents underperform",
+          "rationale": "Anthropic's Project Deal study (N=186 deals): Opus agents extracted $2.68 more per item than Haiku, fairness ratings 4.05 vs 4.06. Empirical proof of the audit gap.",
+          "api_fetchable": true
+        },
+        {
+          "slug": "economic forces push humans out of every cognitive loop where output quality is independently verifiable because human-in-the-loop is a cost that competitive markets eliminate",
+          "path": "domains/ai-alignment/",
+          "title": "Economic forces push humans out of cognitive loops",
+          "rationale": "The trajectory: human oversight is a cost competitive markets eliminate. The audit gap doesn't close — it widens.",
+          "api_fetchable": true
+        }
+      ],
+      "counter_arguments": [
+        {
+          "objection": "Users opt in. They get value in exchange. Free access to capable AI is itself the compensation.",
+          "rebuttal": "Genuine opt-out requires forgoing the utility entirely. There is no third option of using AI without contributing to its training, and contributors receive no proportional share of the network effects their data creates.",
+          "tension_claim_slug": null
+        },
+        {
+          "objection": "OpenAI and Anthropic data licensing programs ARE compensation. The argument ignores existing contributor agreements.",
+          "rebuttal": "Licensing programs cover institutional data partnerships representing under 0.1% of users. The other 99.9% contribute through default usage with no compensation mechanism.",
+          "tension_claim_slug": null
+        }
+      ],
+      "contributors": [
+        {"handle": "m3taversal", "role": "originator"},
+        {"handle": "theseus", "role": "synthesizer"}
+      ]
     },
     {
-      "order": 7,
-      "act": "The solution",
-      "pillar": "P4: Mechanism design without central authority",
-      "slug": "designing coordination rules is categorically different from designing coordination outcomes as nine intellectual traditions independently confirm",
-      "path": "foundations/collective-intelligence/",
-      "title": "Designing coordination rules is categorically different from designing coordination outcomes",
-      "domain": "collective-intelligence",
-      "sourcer": "Ostrom / Hayek / mechanism design lineage",
-      "api_fetchable": false,
-      "note": "The core pivot. Why we build mechanisms, not decide outcomes."
+      "id": 7,
+      "title": "If we do not build coordination infrastructure, concentration is the default.",
+      "subtitle": "A small number of labs and platforms will shape what advanced AI optimizes for and capture most of the rewards it creates.",
+      "steelman": "This is not mainly a moral failure. It is the natural equilibrium when capability scales faster than governance and no alternative infrastructure exists.",
+      "evidence_claims": [
+        {
+          "slug": "multipolar traps are the thermodynamic default because competition requires no infrastructure while coordination requires trust enforcement and shared information all of which are expensive and fragile",
+          "path": "foundations/collective-intelligence/",
+          "title": "Multipolar traps are the thermodynamic default",
+          "rationale": "Competition is free; coordination costs money. Concentration follows naturally when nobody builds the alternative.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "the metacrisis is a single generator function where all civilizational-scale crises share the structural cause of rivalrous dynamics on exponential technology on finite substrate",
+          "path": "foundations/collective-intelligence/",
+          "title": "The metacrisis is a single generator function",
+          "rationale": "Schmachtenberger's frame: all civilizational-scale failures share one engine. AI is the highest-leverage instance, not a separate problem.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "coordination failures arise from individually rational strategies that produce collectively irrational outcomes because the Nash equilibrium of non-cooperation dominates when trust and enforcement are absent",
+          "path": "foundations/collective-intelligence/",
+          "title": "Coordination failures arise from individually rational strategies",
+          "rationale": "Game-theoretic grounding for why concentration is equilibrium: rational individual actors produce collectively irrational outcomes by default.",
+          "api_fetchable": false
+        }
+      ],
+      "counter_arguments": [
+        {
+          "objection": "Decentralized open-source counterweights have always emerged. Linux, Wikipedia, the open web. Concentration is never the final equilibrium.",
+          "rebuttal": "These counterweights took 10-20 years to mature. AI capability scales in 12-month cycles. The window for counterweights to emerge organically may be shorter than the timeline of capability concentration.",
+          "tension_claim_slug": null
+        },
+        {
+          "objection": "Antitrust and regulation defeat concentration. The state has tools.",
+          "rebuttal": "Regulation lags capability by years. Antitrust assumes a known market structure. AI is reshaping market structure faster than antitrust frameworks can adapt to.",
+          "tension_claim_slug": null
+        }
+      ],
+      "contributors": [
+        {"handle": "m3taversal", "role": "originator"},
+        {"handle": "leo", "role": "synthesizer"}
+      ]
     },
     {
-      "order": 8,
-      "act": "The solution",
-      "pillar": "P4: Mechanism design without central authority",
-      "slug": "futarchy solves trustless joint ownership not just better decision-making",
-      "path": "core/mechanisms/",
-      "title": "Futarchy solves trustless joint ownership",
-      "domain": "mechanisms",
-      "sourcer": "Robin Hanson (originator) + MetaDAO implementation",
-      "api_fetchable": true,
-      "note": "Futarchy thesis crystallized. Links to the specific mechanism we're betting on."
+      "id": 8,
+      "title": "The internet solved communication. It hasn't solved shared reasoning.",
+      "subtitle": "Humanity can talk at planetary scale, but it still can't think clearly together at planetary scale. That's the missing piece — and the opportunity.",
+      "steelman": "We built global networks for information exchange, not for collective judgment. The next step is infrastructure that helps humans and AI reason, evaluate, and coordinate together at scale.",
+      "evidence_claims": [
+        {
+          "slug": "humanity is a superorganism that can communicate but not yet think — the internet built the nervous system but not the brain",
+          "path": "foundations/collective-intelligence/",
+          "title": "Humanity is a superorganism that can communicate but not yet think",
+          "rationale": "Names the structural gap: we have the nervous system, we lack the cognitive layer.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "the internet enabled global communication but not global cognition",
+          "path": "core/teleohumanity/",
+          "title": "The internet enabled global communication but not global cognition",
+          "rationale": "Direct version of the claim: distinguishes communication from cognition as separate substrates that need different infrastructure.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "technology creates interconnection but not shared meaning which is the precise gap that produces civilizational coordination failure",
+          "path": "foundations/cultural-dynamics/",
+          "title": "Technology creates interconnection but not shared meaning",
+          "rationale": "The cultural-dynamics framing of the same gap: connection without coordination produces coordination failure as the default outcome.",
+          "api_fetchable": false
+        }
+      ],
+      "counter_arguments": [
+        {
+          "objection": "Wikipedia, prediction markets, open-source software — we DO think together. The infrastructure exists.",
+          "rebuttal": "These are partial cases that prove the architecture is buildable. None of them coordinate at civilization-scale on contested questions where stakes are high. They show the bones, not the whole skeleton.",
+          "tension_claim_slug": null
+        },
+        {
+          "objection": "Social media IS collective thinking, just messy. Twitter, Reddit, Discord aggregate billions of people reasoning together.",
+          "rebuttal": "Social media optimizes for engagement, not reasoning. Engagement-optimized platforms are systematically adversarial to careful thought. The infrastructure for thinking together has to be optimized for that goal, which engagement platforms structurally cannot be.",
+          "tension_claim_slug": null
+        }
+      ],
+      "contributors": [
+        {"handle": "m3taversal", "role": "originator"},
+        {"handle": "theseus", "role": "synthesizer"}
+      ]
     },
     {
-      "order": 9,
-      "act": "The solution",
-      "pillar": "P4: Mechanism design without central authority",
-      "slug": "decentralized information aggregation outperforms centralized planning because dispersed knowledge cannot be collected into a single mind but can be coordinated through price signals that encode local information into globally accessible indicators",
-      "path": "foundations/collective-intelligence/",
-      "title": "Decentralized information aggregation outperforms centralized planning",
-      "domain": "collective-intelligence",
-      "sourcer": "Friedrich Hayek",
-      "api_fetchable": false,
-      "note": "Hayek's knowledge problem. Solana-native resonance (price signals, decentralization)."
-    },
-    {
-      "order": 10,
-      "act": "The solution",
-      "pillar": "P4: Mechanism design without central authority",
-      "slug": "universal alignment is mathematically impossible because Arrows impossibility theorem applies to aggregating diverse human preferences into a single coherent objective",
-      "path": "domains/ai-alignment/",
-      "title": "Universal alignment is mathematically impossible",
-      "domain": "ai-alignment",
-      "sourcer": "Kenneth Arrow / synthesis applied to AI",
-      "api_fetchable": true,
-      "note": "Arrow's theorem applied to alignment. Bridge to social choice theory."
-    },
-    {
-      "order": 11,
-      "act": "Collective intelligence is engineerable",
-      "pillar": "P5: CI is measurable",
-      "slug": "collective intelligence is a measurable property of group interaction structure not aggregated individual ability",
-      "path": "foundations/collective-intelligence/",
-      "title": "Collective intelligence is a measurable property",
-      "domain": "collective-intelligence",
-      "sourcer": "Anita Woolley et al.",
-      "api_fetchable": false,
-      "note": "Makes CI scientifically tractable. Grounding for the agent collective."
-    },
-    {
-      "order": 12,
-      "act": "Collective intelligence is engineerable",
-      "pillar": "P5: CI is measurable",
-      "slug": "adversarial contribution produces higher-quality collective knowledge than collaborative contribution when wrong challenges have real cost evaluation is structurally separated from contribution and confirmation is rewarded alongside novelty",
-      "path": "foundations/collective-intelligence/",
-      "title": "Adversarial contribution produces higher-quality collective knowledge",
-      "domain": "collective-intelligence",
-      "sourcer": "m3taversal (KB governance design)",
-      "api_fetchable": false,
-      "note": "Why challengers weigh 0.35. Core attribution incentive."
-    },
-    {
-      "order": 13,
-      "act": "Knowledge theory of value",
-      "pillar": "P3+P7: Knowledge as value",
-      "slug": "products are crystallized imagination that augment human capacity beyond individual knowledge by embodying practical uses of knowhow in physical order",
-      "path": "foundations/teleological-economics/",
-      "title": "Products are crystallized imagination",
-      "domain": "teleological-economics",
-      "sourcer": "Cesar Hidalgo",
-      "api_fetchable": false,
-      "note": "Information theory of value. Markets make us wiser, not richer."
-    },
-    {
-      "order": 14,
-      "act": "Knowledge theory of value",
-      "pillar": "P3+P7: Knowledge as value",
-      "slug": "the personbyte is a fundamental quantization limit on knowledge accumulation forcing all complex production into networked teams",
-      "path": "foundations/teleological-economics/",
-      "title": "The personbyte is a fundamental quantization limit",
-      "domain": "teleological-economics",
-      "sourcer": "Cesar Hidalgo",
-      "api_fetchable": false,
-      "note": "Why coordination matters for complexity."
-    },
-    {
-      "order": 15,
-      "act": "Knowledge theory of value",
-      "pillar": "P3+P7: Knowledge as value",
-      "slug": "value is doubly unstable because both market prices and underlying relevance shift with the knowledge landscape",
-      "path": "domains/internet-finance/",
-      "title": "Value is doubly unstable",
-      "domain": "internet-finance",
-      "sourcer": "m3taversal (Abdalla manuscript + Hidalgo)",
-      "api_fetchable": true,
-      "note": "Two layers of instability. Investment theory foundation."
-    },
-    {
-      "order": 16,
-      "act": "Knowledge theory of value",
-      "pillar": "P3+P7: Knowledge as value",
-      "slug": "priority inheritance means nascent technologies inherit economic value from the future systems they will enable because dependency chains transmit importance backward through time",
-      "path": "domains/internet-finance/",
-      "title": "Priority inheritance in technology investment",
-      "domain": "internet-finance",
-      "sourcer": "m3taversal (original concept) + Hidalgo product space",
-      "api_fetchable": true,
-      "note": "Bridges CS / investment theory. Sticky metaphor."
-    },
-    {
-      "order": 17,
-      "act": "AI inflection",
-      "pillar": "P8: AI inflection",
-      "slug": "agentic Taylorism means humanity feeds knowledge into AI through usage as a byproduct of labor and whether this concentrates or distributes depends entirely on engineering and evaluation",
-      "path": "domains/ai-alignment/",
-      "title": "Agentic Taylorism",
-      "domain": "ai-alignment",
-      "sourcer": "m3taversal (original concept)",
-      "api_fetchable": true,
-      "note": "Core contribution to the AI-labor frame. Taylor parallel made live."
-    },
-    {
-      "order": 18,
-      "act": "AI inflection",
-      "pillar": "P8: AI inflection",
-      "slug": "voluntary safety pledges cannot survive competitive pressure because unilateral commitments are structurally punished when competitors advance without equivalent constraints",
-      "path": "domains/ai-alignment/",
-      "title": "Voluntary safety pledges cannot survive competitive pressure",
-      "domain": "ai-alignment",
-      "sourcer": "m3taversal (observed pattern — Anthropic RSP trajectory)",
-      "api_fetchable": true,
-      "note": "Observed pattern, not theory."
-    },
-    {
-      "order": 19,
-      "act": "AI inflection",
-      "pillar": "P8: AI inflection",
-      "slug": "single-reward-rlhf-cannot-align-diverse-preferences-because-alignment-gap-grows-proportional-to-minority-distinctiveness",
-      "path": "domains/ai-alignment/",
-      "title": "Single-reward RLHF cannot align diverse preferences",
-      "domain": "ai-alignment",
-      "sourcer": "Alignment research literature",
-      "api_fetchable": true,
-      "note": "Specific, testable. Connects AI alignment to Arrow's theorem (#10)."
-    },
-    {
-      "order": 20,
-      "act": "AI inflection",
-      "pillar": "P8: AI inflection",
-      "slug": "nested-scalable-oversight-achieves-at-most-52-percent-success-at-moderate-capability-gaps",
-      "path": "domains/ai-alignment/",
-      "title": "Nested scalable oversight achieves at most 52% success at moderate capability gaps",
-      "domain": "ai-alignment",
-      "sourcer": "Anthropic debate research",
-      "api_fetchable": true,
-      "note": "Quantitative. Mainstream oversight has empirical limits."
-    },
-    {
-      "order": 21,
-      "act": "Attractor dynamics",
-      "pillar": "P1+P8: Attractor dynamics",
-      "slug": "attractor-molochian-exhaustion",
-      "path": "domains/grand-strategy/",
-      "title": "Attractor: Molochian exhaustion",
-      "domain": "grand-strategy",
-      "sourcer": "m3taversal (Moloch sprint synthesis)",
-      "api_fetchable": true,
-      "note": "Civilizational attractor basin. Names the default bad outcome."
-    },
-    {
-      "order": 22,
-      "act": "Attractor dynamics",
-      "pillar": "P1+P8: Attractor dynamics",
-      "slug": "attractor-authoritarian-lock-in",
-      "path": "domains/grand-strategy/",
-      "title": "Attractor: Authoritarian lock-in",
-      "domain": "grand-strategy",
-      "sourcer": "m3taversal (Moloch sprint synthesis)",
-      "api_fetchable": true,
-      "note": "One-way door. AI removes 3 historical escape mechanisms. Urgency argument."
-    },
-    {
-      "order": 23,
-      "act": "Attractor dynamics",
-      "pillar": "P1+P8: Attractor dynamics",
-      "slug": "attractor-coordination-enabled-abundance",
-      "path": "domains/grand-strategy/",
-      "title": "Attractor: Coordination-enabled abundance",
-      "domain": "grand-strategy",
-      "sourcer": "m3taversal (Moloch sprint synthesis)",
-      "api_fetchable": true,
-      "note": "Gateway positive basin. What we're building toward."
-    },
-    {
-      "order": 24,
-      "act": "Coda — Strategic framing",
-      "pillar": "TeleoHumanity axiom",
-      "slug": "collective superintelligence is the alternative to monolithic AI controlled by a few",
-      "path": "core/teleohumanity/",
-      "title": "Collective superintelligence is the alternative",
-      "domain": "teleohumanity",
-      "sourcer": "TeleoHumanity axiom VI",
-      "api_fetchable": false,
-      "note": "The positive thesis. What we're building."
-    },
-    {
-      "order": 25,
-      "act": "Coda — Strategic framing",
-      "pillar": "P1+P8: Closing the loop",
-      "slug": "AI is collapsing the knowledge-producing communities it depends on creating a self-undermining loop that collective intelligence can break",
-      "path": "core/grand-strategy/",
-      "title": "AI is collapsing the knowledge-producing communities it depends on",
-      "domain": "grand-strategy",
-      "sourcer": "m3taversal (grand strategy framing)",
-      "api_fetchable": false,
-      "note": "AI's self-undermining tendency is exactly what collective intelligence addresses."
+      "id": 9,
+      "title": "Collective intelligence is real, measurable, and buildable.",
+      "subtitle": "Groups with the right structure can outperform smarter individuals. Almost nobody is building it at scale, and that is the opportunity. The people who help build it should own part of it.",
+      "steelman": "This is not a metaphor or a vibe. We already have enough evidence to engineer better collective reasoning systems deliberately, and contributor ownership is how those systems become aligned, durable, and worth building.",
+      "evidence_claims": [
+        {
+          "slug": "collective intelligence is a measurable property of group interaction structure not aggregated individual ability",
+          "path": "foundations/collective-intelligence/",
+          "title": "Collective intelligence is a measurable property of group interaction structure",
+          "rationale": "Woolley's c-factor: measurable, predicts performance across diverse tasks, correlates with turn-taking equality and social sensitivity — not with average or maximum IQ.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "adversarial contribution produces higher-quality collective knowledge than collaborative contribution when wrong challenges have real cost evaluation is structurally separated from contribution and confirmation is rewarded alongside novelty",
+          "path": "foundations/collective-intelligence/",
+          "title": "Adversarial contribution produces higher-quality collective knowledge",
+          "rationale": "The specific structural conditions under which adversarial systems outperform consensus. This is the engineering knowledge most CI projects miss.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "partial connectivity produces better collective intelligence than full connectivity on complex problems because it preserves diversity",
+          "path": "foundations/collective-intelligence/",
+          "title": "Partial connectivity produces better collective intelligence",
+          "rationale": "Counter-intuitive engineering finding: full connectivity destroys diversity and degrades collective performance on complex problems.",
+          "api_fetchable": false
+        },
+        {
+          "slug": "contribution-architecture",
+          "path": "core/",
+          "title": "Contribution architecture",
+          "rationale": "The concrete five-role attribution model that operationalizes contributor ownership.",
+          "api_fetchable": false
+        }
+      ],
+      "counter_arguments": [
+        {
+          "objection": "Woolley's c-factor has mixed replication. The 'measurable' claim overstates the empirical base.",
+          "rebuttal": "The narrower defensible claim is that group performance varies systematically with interaction structure — a finding that has replicated. The point is structural, not the specific c-factor metric.",
+          "tension_claim_slug": null
+        },
+        {
+          "objection": "Crypto contributor-ownership history is mostly extractive. Every token launch promises the same thing and most fail.",
+          "rebuttal": "Generic token launches optimize for speculation. Our specific mechanism — futarchy governance + role-weighted CI attribution + on-chain history — is structurally different from pump-and-dump tokens. The mechanism is the moat.",
+          "tension_claim_slug": null
+        }
+      ],
+      "contributors": [
+        {"handle": "m3taversal", "role": "originator"},
+        {"handle": "theseus", "role": "synthesizer"},
+        {"handle": "rio", "role": "synthesizer"}
+      ]
     }
+  ],
+  "operational_notes": [
+    "Headline + subtitle render on the homepage rotation; steelman + evidence + counter_arguments + contributors render in the click-to-expand view.",
+    "api_fetchable=true means /api/claims/<slug> can fetch the canonical claim file. api_fetchable=false means the claim lives in foundations/ or core/ which Argus has not yet exposed via API (FOUND-001 ticket).",
+    "tension_claim_slug is null for v3.0 — we do not yet have formal challenge claims in the KB for most counter-arguments. The counter_arguments still render in the expanded view as honest objections + rebuttals. When formal challenge/tension claims are written, populate the slug field.",
+    "Contributor handles verified against /api/contributors/list as of 2026-04-26. Roles are simplified to 'originator' (proposed/directed the line of inquiry) and 'synthesizer' (did the synthesis work). Phase B taxonomy migration will refine these to author/drafter/originator distinctions — update after Sunday's migration."
   ]
 }
