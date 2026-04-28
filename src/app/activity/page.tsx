@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { fetchActivityFeed, fetchClaims } from "@/lib/api";
+import { fetchActivityFeed, fetchClaims, fetchContributors } from "@/lib/api";
+import { HowItWorks } from "@/components/how-it-works";
 
 export const revalidate = 60;
 
@@ -15,10 +16,12 @@ type Event = {
   source_channel: string | null;
 };
 
-// Map pipeline event types → visual kinds.
-// Ready for enrich/challenge when they land; today the pipeline only emits `create`.
+// Map pipeline event types → visual kinds. Epimetheus's classifier now
+// emits create / source / enrich live; challenge stays pre-styled for when
+// the challenge submission UI ships.
 const KIND_BY_TYPE: Record<string, { label: string; kind: string }> = {
   create: { label: "New claim", kind: "claim" },
+  source: { label: "New source", kind: "source" },
   enrich: { label: "Enrichment", kind: "enrichment" },
   challenge: { label: "Counter", kind: "counter" },
 };
@@ -82,18 +85,36 @@ function eventsThisWeek(events: Event[]): number {
   }).length;
 }
 
+type ContributorRow = {
+  handle: string;
+  last_contribution: string | null;
+};
+
+function activeWithin30Days(rows: ContributorRow[]): number {
+  const cutoff = Date.now() - 30 * 86_400_000;
+  return rows.filter((c) => {
+    if (!c.last_contribution) return false;
+    const t = Date.parse(c.last_contribution);
+    return !Number.isNaN(t) && t >= cutoff;
+  }).length;
+}
+
 export default async function ActivityPage() {
-  // Pull the last 100 events + claim totals in parallel.
-  const [activity, claims] = await Promise.all([
+  // Pull the last 100 events + claim totals + contributor list in parallel.
+  // Contributors fetch carries `last_contribution` per row, which powers the
+  // 30-day active window stat without re-scanning the activity feed.
+  const [activity, claims, contributors] = await Promise.all([
     fetchActivityFeed({ sort: "recent", limit: 100 }),
     fetchClaims({ limit: 1 }),
+    fetchContributors(1, 200),
   ]);
 
   const events: Event[] = activity?.events ?? [];
   const totalEvents: number = activity?.total ?? events.length;
   const totalClaims: number = claims?.total ?? 0;
   const domainCount: number = claims?.domains ? Object.keys(claims.domains).length : 0;
-  const uniqueContributors = new Set(events.map((e) => e.contributor)).size;
+  const contributorRows: ContributorRow[] = contributors?.contributors ?? [];
+  const active30d = activeWithin30Days(contributorRows);
 
   const groups = groupByDay(events);
   const weekCount = eventsThisWeek(events);
@@ -101,7 +122,26 @@ export default async function ActivityPage() {
   return (
     <div className="timeline-page">
       <div className="page-head">
-        <h1>Timeline</h1>
+        <div className="page-head-row">
+          <h1>Timeline</h1>
+          <HowItWorks
+            title="How the Timeline works"
+            body={
+              <>
+                <p>
+                  Every claim, source, and enrichment merged into the codex
+                  shows up here with a <em>kind</em> color and the channel it
+                  came from (telegram, agent, github, maintenance).
+                </p>
+                <p>
+                  CI is the contribution score earned for that event,
+                  weighted by role. Contributors active in the last 30 days
+                  drive the stat above.
+                </p>
+              </>
+            }
+          />
+        </div>
         <div className="sub">
           Every change flowing into the knowledge base. Claims, enrichments, and
           challenges as contributors ship them.
@@ -114,8 +154,8 @@ export default async function ActivityPage() {
           <div className="l">Events this week</div>
         </div>
         <div className="stat">
-          <div className="v">{uniqueContributors.toLocaleString()}</div>
-          <div className="l">Contributors active</div>
+          <div className="v">{active30d.toLocaleString()}</div>
+          <div className="l">Active contributors (30d)</div>
         </div>
         <div className="stat">
           <div className="v">{totalEvents.toLocaleString()}</div>

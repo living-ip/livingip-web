@@ -75,7 +75,7 @@ export default async function KnowledgeBaseReaderPage({
           <span className="label">Source</span>
           {claim.sourcer && (
             <>
-              Contributed by <strong>{claim.sourcer}</strong>
+              <strong>{claim.sourcer}</strong>
               {claim.source ? " — " : null}
             </>
           )}

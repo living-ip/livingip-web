@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { fetchClaims, fetchSearch, type SearchResult } from "@/lib/api";
+import { HowItWorks } from "@/components/how-it-works";
 
 export const revalidate = 60;
 
@@ -145,7 +146,27 @@ export default async function KnowledgeBasePage({
   return (
     <div className="kb-page">
       <div className="kb-head">
-        <div className="eyebrow">Knowledge base</div>
+        <div className="page-head-row">
+          <div className="eyebrow">Knowledge base</div>
+          <HowItWorks
+            title="How the Knowledge Base works"
+            body={
+              <>
+                <p>
+                  Every entry is an atomic claim with evidence and a traceable
+                  source. Browse by domain tab, or search semantically — typing
+                  in the box queries Qdrant against claim embeddings, ranked
+                  by similarity score above a 0.25 floor.
+                </p>
+                <p>
+                  When semantic search returns nothing, the page falls back to
+                  a title text filter so the click never dead-ends. Click any
+                  claim to read its full body, evidence, and connections.
+                </p>
+              </>
+            }
+          />
+        </div>
         <h1>
           {totalAllClaims.toLocaleString()} claims across{" "}
           {sortedDomains.length} domains
