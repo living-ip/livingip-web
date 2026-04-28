@@ -1259,6 +1259,9 @@ a:hover {
 .timeline-page .tl-item[data-kind="claim"]::before {
   border-color: var(--purple);
 }
+.timeline-page .tl-item[data-kind="source"]::before {
+  border-color: var(--warn);
+}
 .timeline-page .tl-item[data-kind="enrichment"]::before {
   border-color: var(--pos);
 }
@@ -1284,6 +1287,9 @@ a:hover {
 }
 .timeline-page .tl-item[data-kind="claim"] .tl-kind {
   color: var(--purple);
+}
+.timeline-page .tl-item[data-kind="source"] .tl-kind {
+  color: var(--warn);
 }
 .timeline-page .tl-item[data-kind="enrichment"] .tl-kind {
   color: var(--pos);
@@ -1965,5 +1971,99 @@ a:hover {
   color: var(--text-faint);
   border-top: 1px solid var(--border);
   margin-top: auto;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Page-head row — h1/eyebrow on the left, HowItWorks on the right.
+   Used by /activity (Timeline) and /knowledge-base (KB browse).
+   ───────────────────────────────────────────────────────────── */
+.page-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   HowItWorks popover — disclosure trigger + floating card.
+   Mount-guarded inline via the component; CSS only handles open state.
+   ───────────────────────────────────────────────────────────── */
+.how-it-works {
+  position: relative;
+  display: inline-flex;
+}
+
+.how-it-works .hiw-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.how-it-works .hiw-trigger:hover {
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+.how-it-works .hiw-trigger[aria-expanded="true"] {
+  color: var(--text);
+  border-color: var(--purple-glow);
+  background: var(--purple-subtle);
+}
+
+.how-it-works .hiw-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(360px, calc(100vw - 32px));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  z-index: 50;
+  animation: hiw-fade-in 0.15s ease-out;
+}
+
+@keyframes hiw-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.how-it-works .hiw-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.how-it-works .hiw-body {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.how-it-works .hiw-body p {
+  margin: 0 0 8px;
+}
+.how-it-works .hiw-body p:last-child {
+  margin-bottom: 0;
+}
+.how-it-works .hiw-body em {
+  font-style: italic;
+  color: var(--text);
 }
 

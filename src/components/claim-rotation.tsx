@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { RotationEntry } from "@/lib/rotation";
 import { ClaimInteraction } from "@/components/claim-interaction";
@@ -7,6 +8,17 @@ import { ClaimInteraction } from "@/components/claim-interaction";
 interface Props {
   rotation: RotationEntry[];
   initialIndex: number;
+}
+
+// Resolve the headline click-through target.
+// Prefer the first fetchable evidence claim — its KB page is the strongest
+// landing for a curious visitor. If no evidence is fetchable yet (foundations
+// + core not exposed via Argus), fall back to semantic search on the headline
+// so the click never dead-ends.
+function headlineHref(entry: RotationEntry): string {
+  const fetchable = entry.evidence_claims.find((e) => e.api_fetchable);
+  if (fetchable) return `/knowledge-base/${encodeURIComponent(fetchable.slug)}`;
+  return `/knowledge-base?q=${encodeURIComponent(entry.title)}`;
 }
 
 // Hash handle → hue for deterministic avatar gradient. Mirrors the inline
@@ -72,7 +84,9 @@ export function ClaimRotation({ rotation, initialIndex }: Props) {
   return (
     <div className="claim-home">
       <div className="claim-block">
-        <div className="claim-text">{entry.title}</div>
+        <Link href={headlineHref(entry)} className="claim-text claim-text-link">
+          {entry.title}
+        </Link>
         <div className="claim-steelman">{entry.steelman}</div>
 
         {visibleContributors.length > 0 && (
